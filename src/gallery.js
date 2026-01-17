@@ -20,7 +20,6 @@ export class Gallery {
 		this.createModal()
 	}
 
-	// Создаем модальное окно для просмотра фото
 	createModal() {
 		const modalHTML = `
 			<div id="imageModal" class="modal">
@@ -49,22 +48,18 @@ export class Gallery {
 		const prevBtn = modal.querySelector('.prev-btn')
 		const nextBtn = modal.querySelector('.next-btn')
 
-		// Закрытие модального окна
 		closeBtn.onclick = () => {
 			modal.style.display = 'none'
 		}
 
-		// Навигация вперед
 		nextBtn.onclick = () => {
 			this.nextImage()
 		}
 
-		// Навигация назад
 		prevBtn.onclick = () => {
 			this.prevImage()
 		}
 
-		// Закрытие при клике вне изображения
 		modal.onclick = event => {
 			if (
 				event.target === modal ||
@@ -75,7 +70,6 @@ export class Gallery {
 			}
 		}
 
-		// Навигация клавишами
 		document.addEventListener('keydown', e => {
 			if (modal.style.display !== 'block') return
 
@@ -96,7 +90,6 @@ export class Gallery {
 			}
 		})
 
-		// Свайп на мобильных устройствах
 		let touchStartX = 0
 		let touchEndX = 0
 
@@ -109,28 +102,25 @@ export class Gallery {
 			this.handleSwipe()
 		})
 
-		// Кнопка скачивания
 		const downloadBtn = document.getElementById('downloadBtn')
 		downloadBtn.onclick = () => {
 			this.downloadImage()
 		}
 	}
 
-	// Обработка свайпа
 	handleSwipe() {
 		const swipeThreshold = 50
 		const diff = touchStartX - touchEndX
 
 		if (Math.abs(diff) > swipeThreshold) {
 			if (diff > 0) {
-				this.nextImage() // Свайп влево - следующее
+				this.nextImage()
 			} else {
-				this.prevImage() // Свайп вправо - предыдущее
+				this.prevImage()
 			}
 		}
 	}
 
-	// Перейти к следующему изображению
 	nextImage() {
 		if (this.images.length <= 1) return
 
@@ -138,7 +128,6 @@ export class Gallery {
 		this.showCurrentImage()
 	}
 
-	// Перейти к предыдущему изображению
 	prevImage() {
 		if (this.images.length <= 1) return
 
@@ -146,7 +135,6 @@ export class Gallery {
 		this.showCurrentImage()
 	}
 
-	// Показать текущее изображение
 	showCurrentImage() {
 		if (this.images.length === 0) return
 
@@ -162,7 +150,6 @@ export class Gallery {
 			caption.textContent = image.name || 'Без названия'
 			counter.textContent = ` (${this.currentImageIndex + 1}/${this.images.length})`
 
-			// Загружаем изображение чтобы получить его реальные размеры
 			const img = new Image()
 			img.onload = () => {
 				this.adjustImageSize(modalImg, img.width, img.height)
@@ -176,7 +163,6 @@ export class Gallery {
 		}, 200)
 	}
 
-	// Скачивание изображения
 	downloadImage() {
 		if (this.images.length === 0) return
 
@@ -184,7 +170,6 @@ export class Gallery {
 		const imageUrl = currentImage.url
 		const imageName = currentImage.name || 'image'
 
-		// Создаем временную ссылку для скачивания
 		const link = document.createElement('a')
 		link.href = imageUrl
 		link.download = `${imageName.replace(/\s+/g, '_')}.jpg`
@@ -193,9 +178,7 @@ export class Gallery {
 		document.body.removeChild(link)
 	}
 
-	// Открытие изображения в модальном окне
 	openImageModal(imageUrl, imageName) {
-		// Находим индекс текущего изображения
 		this.currentImageIndex = this.images.findIndex(
 			img => img.url === imageUrl && img.name === imageName
 		)
@@ -210,7 +193,6 @@ export class Gallery {
 		this.showCurrentImage()
 	}
 
-	// Подгоняем размер изображения под 70% экрана
 	adjustImageSize(imgElement, originalWidth, originalHeight) {
 		const windowWidth = window.innerWidth
 		const windowHeight = window.innerHeight
@@ -222,13 +204,11 @@ export class Gallery {
 		let width = originalWidth
 		let height = originalHeight
 
-		// Если изображение шире, чем 70% экрана
 		if (width > maxWidth) {
 			height = (height * maxWidth) / width
 			width = maxWidth
 		}
 
-		// Если изображение выше, чем 70% экрана
 		if (height > maxHeight) {
 			width = (width * maxHeight) / height
 			height = maxHeight
@@ -238,7 +218,6 @@ export class Gallery {
 		imgElement.style.height = `${height}px`
 	}
 
-	// Загрузить изображения
 	async loadImages() {
 		const data = await getData(this.apiUrl)
 
@@ -253,7 +232,6 @@ export class Gallery {
 		this.render()
 	}
 
-	// Добавить новое изображение
 	async addImage(title, url) {
 		if (!title || !url) {
 			alert('Пожалуйста, заполните все поля')
@@ -275,7 +253,6 @@ export class Gallery {
 		}
 	}
 
-	// Сортировать по названию
 	sortByName() {
 		if (this.images.length === 0) return
 
@@ -288,7 +265,6 @@ export class Gallery {
 		this.render()
 	}
 
-	// Перемешать изображения
 	shuffle() {
 		if (this.images.length === 0) return
 
@@ -300,7 +276,6 @@ export class Gallery {
 		this.render()
 	}
 
-	// Отобразить галерею
 	render() {
 		this.container.innerHTML = ''
 
@@ -317,7 +292,6 @@ export class Gallery {
 		})
 	}
 
-	// Создать карточку изображения
 	createImageCard(image, index) {
 		const card = document.createElement('div')
 		card.className = 'image-card'
@@ -331,7 +305,6 @@ export class Gallery {
 			img.src = 'https://via.placeholder.com/250x180?text=Ошибка+загрузки'
 		}
 
-		// Клик для открытия в модальном окне
 		img.onclick = () => {
 			this.currentImageIndex = index
 			this.openImageModal(image.url, image.name)
@@ -341,7 +314,6 @@ export class Gallery {
 		title.className = 'title'
 		title.textContent = image.name || 'Без названия'
 
-		// Клик по названию тоже открывает изображение
 		title.onclick = () => {
 			this.currentImageIndex = index
 			this.openImageModal(image.url, image.name)
@@ -353,7 +325,6 @@ export class Gallery {
 		return card
 	}
 
-	// Очистить форму
 	clearForm() {
 		const titleInput = document.getElementById('imageTitle')
 		const urlInput = document.getElementById('imageUrl')
@@ -364,7 +335,6 @@ export class Gallery {
 		if (titleInput) titleInput.focus()
 	}
 
-	// Показать сообщение о пустой галерее
 	showEmptyMessage() {
 		let emptyMsg = document.getElementById('emptyMessage')
 
@@ -380,7 +350,6 @@ export class Gallery {
 		emptyMsg.style.display = 'block'
 	}
 
-	// Скрыть сообщение о пустой галерее
 	hideEmptyMessage() {
 		const emptyMsg = document.getElementById('emptyMessage')
 		if (emptyMsg) {
@@ -388,7 +357,6 @@ export class Gallery {
 		}
 	}
 
-	// Настроить обработчики событий
 	setupEventListeners() {
 		const addBtn = document.getElementById('addBtn')
 		if (addBtn) {
