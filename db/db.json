@@ -1,0 +1,44 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "name": "Горы",
+      "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+    },
+    {
+      "id": 2,
+      "name": "Океан",
+      "url": "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w-400&h=300&fit=crop"
+    },
+    {
+      "id": 3,
+      "name": "Лес",
+      "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop"
+    },
+    {
+      "id": 4,
+      "name": "Город ночью",
+      "url": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&h=300&fit=crop"
+    },
+    {
+      "id": 5,
+      "name": "Пустыня",
+      "url": "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=400&h=300&fit=crop"
+    },
+    {
+      "id": 6,
+      "name": "Северное сияние",
+      "url": "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "ff9c",
+      "name": "RODE NT1",
+      "url": "https://muzikercdn.com/uploads/products/12541/1254198/main_29268bfc.jpg"
+    },
+    {
+      "id": "d569",
+      "name": "Камни",
+      "url": "https://img.goodfon.ru/wallpaper/nbig/c/f7/pebbles-artistic-black-rocks-red-rocks-dark-aesthetic-pile-o.webp"
+    }
+  ]
+}

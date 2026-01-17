@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Галерея</title>
+	<link rel="stylesheet" href="./src/css/index.css">
+</head>
+
+<body>
+	<div class="container">
+		<h1>Галерея изображений</h1>
+
+		<!-- Форма добавления -->
+		<div class="add-form">
+			<input type="text" id="imageTitle" placeholder="Название изображения">
+			<input type="url" id="imageUrl" placeholder="URL изображения">
+			<button id="addBtn">Добавить</button>
+		</div>
+
+		<!-- Панель управления -->
+		<div class="controls">
+			<button id="sortBtn">Сортировать по названию</button>
+			<button id="shuffleBtn">Перемешать</button>
+		</div>
+
+		<div id="gallery" class="gallery"></div>
+
+		<!-- Сообщение при пустой галерее -->
+		<div id="emptyMessage" class="empty-message" style="display: none;">
+			Галерея пуста. Добавьте первое изображение!
+		</div>
+	</div>
+
+	<script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
